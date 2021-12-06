@@ -10,7 +10,7 @@
 std::vector<int> parse_bingo_nums(const std::string& filename) {
 	std::ifstream infile{ filename };
 	std::string line{};
-	
+
 	std::getline(infile, line);
 	std::replace(line.begin(), line.end(), ',', ' ');
 
@@ -50,7 +50,7 @@ void solve_part1()
 {
 	//std::string filename{ "example-input.txt" };
 	std::string filename{ "input.txt" };
-	
+
 	std::vector<int> bingo_nums{ parse_bingo_nums(filename) };
 	std::vector<BingoBoard> boards{ parse_bingo_boards(filename) };
 	std::shared_ptr<BingoBoard> winner;
@@ -58,12 +58,10 @@ void solve_part1()
 	int last_num_called{};
 	for (auto& num : bingo_nums) {
 		last_num_called = num;
-		std::cout << "Calling " << last_num_called << "...\n";
 		for (auto& board : boards) {
 			board.mark(num);
 			if (board.winner()) {
 				winner = std::make_shared<BingoBoard>(board);
-				std::cout << "We have a winning board!\n\n";
 				break;
 			}
 		}
@@ -71,16 +69,18 @@ void solve_part1()
 		if (winner) break;
 	}
 
-	
+
 	if (winner) {
 		std::cout << "Winning board:\n" << *winner << '\n';
-		std::cout << "Winning row: ";
-		for (auto& num : winner->winning_numbers()) {
+
+		std::cout << "Winning numbers: ";
+		for (auto& num : winner->winning_numbers())
 			std::cout << num << ' ';
-		}
 		std::cout << '\n';
 
-		std::cout << "Unmarked numbers * last number called = " << (winner->sum_unmarked_numbers() * last_num_called) << '\n';
+		std::cout << "Last number called: " << last_num_called << '\n';
+
+		std::cout << "Answer: " << (winner->sum_unmarked_numbers() * last_num_called) << '\n';
 	}
 	std::cout << std::endl;
 }
@@ -98,14 +98,13 @@ void solve_part2()
 	int last_num_called{};
 	for (auto& num : bingo_nums) {
 		last_num_called = num;
-		std::cout << "Calling " << last_num_called << "...\n";
 		for (auto& board : boards) {
-			if (board.winner() && std::find(winning_numbers.begin(), winning_numbers.end(), board.winning_numbers()) != winning_numbers.end()) {
+			if (std::find(winning_numbers.begin(), winning_numbers.end(), board.winning_numbers()) != winning_numbers.end()) {
 				continue;
 			}
 
 			board.mark(num);
-			if (board.winner() && std::find(winning_numbers.begin(), winning_numbers.end(), board.winning_numbers()) == winning_numbers.end()) {
+			if (board.winner()) {
 				last_winner = std::make_shared<BingoBoard>(board);
 				winning_numbers.push_back(board.winning_numbers());
 			}
@@ -116,14 +115,16 @@ void solve_part2()
 	}
 
 	if (last_winner) {
-		std::cout << "Last winner was:\n" << *last_winner << '\n';
+		std::cout << "Last winning board:\n" << *last_winner << '\n';
 
-		std::cout << "Number of winners: " << winning_numbers.size() << '\n';
-		std::cout << "Number of boards: " << boards.size() << '\n';
-
-
+		std::cout << "Winning numbers: ";
+		for (auto& num : last_winner->winning_numbers())
+			std::cout << num << ' ';
+		std::cout << '\n';
 		
-		std::cout << "Unmarked numbers * last number called = " << (last_winner->sum_unmarked_numbers() * last_num_called) << '\n';
+		std::cout << "Last number called: " << last_num_called << '\n';
+
+		std::cout << "Answer: " << (last_winner->sum_unmarked_numbers() * last_num_called) << '\n';
 	}
 	std::cout << std::endl;
 }
@@ -132,7 +133,7 @@ int main()
 {
 	std::cout << "========== Part 1 ==========\n";
 	solve_part1();
-	
+
 	std::cout << "\n========== Part 2 ==========\n";
 	solve_part2();
 
