@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-void part1(p9::HeightMap& t_hmap)
+void part1(const p9::HeightMap& t_hmap)
 {
 	int risk{ 0 };
 	for (auto& lp : t_hmap.lowpoints()) {
@@ -14,7 +14,7 @@ void part1(p9::HeightMap& t_hmap)
 	std::cout << "Part 1: " << risk << std::endl;
 }
 
-void part2(p9::HeightMap& t_hmap)
+void part2(const p9::HeightMap& t_hmap)
 {
 	auto basins{ t_hmap.basins() };
 	std::vector<int> sizes{};
