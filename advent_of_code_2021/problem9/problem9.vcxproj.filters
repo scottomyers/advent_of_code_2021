@@ -18,9 +18,12 @@
     <ClCompile Include="problem9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="heightmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="problem9.h">
+    <ClInclude Include="heightmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

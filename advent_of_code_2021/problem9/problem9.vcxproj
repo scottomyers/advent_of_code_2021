@@ -145,10 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="heightmap.cpp" />
     <ClCompile Include="problem9.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="problem9.h" />
+    <ClInclude Include="heightmap.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
