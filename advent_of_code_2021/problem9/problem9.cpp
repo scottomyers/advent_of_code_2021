@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-void part1(p9::HeightMap t_hmap) // TODO figure out how to pass by reference
+void part1(p9::HeightMap& t_hmap)
 {
 	int risk{ 0 };
 	for (auto& lp : t_hmap.lowpoints()) {
@@ -14,7 +14,7 @@ void part1(p9::HeightMap t_hmap) // TODO figure out how to pass by reference
 	std::cout << "Part 1: " << risk << std::endl;
 }
 
-void part2(p9::HeightMap t_hmap)
+void part2(p9::HeightMap& t_hmap)
 {
 	auto basins{ t_hmap.basins() };
 	std::vector<int> sizes{};
@@ -39,11 +39,11 @@ int main()
 	p9::HeightMap example{ example_data };
 	p9::HeightMap my_input{ "input.txt" };
 
-	part1(p9::HeightMap(example));		// 15
-	part1(p9::HeightMap(my_input));		// 512
+	part1(example);		// 15
+	part1(my_input);	// 512
 
-	part2(p9::HeightMap(example));		// 1134
-	part2(p9::HeightMap(my_input));		// 1600104
+	part2(example);		// 1134
+	part2(my_input);	// 1600104
 
 	return 0;
 }
