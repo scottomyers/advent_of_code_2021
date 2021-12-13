@@ -11,7 +11,7 @@ Grid App::build_empty_grid(int x, int y) const
 {
 	Grid g{};
 	for (int i = 0; i < x; ++i) {
-		g.grid.push_back(std::vector<int>(y, 0));
+		g.m_grid.push_back(std::vector<int>(y, 0));
 	}
 	return g;
 }
@@ -22,7 +22,7 @@ Grid App::build_grid(const std::vector<Line>& lines) const
 
 	for (auto& line : lines) {
 		for (auto& p : points(line)) {
-			++g.grid[p.x][p.y];
+			++g.m_grid[p.x][p.y];
 		}
 	}
 
@@ -32,7 +32,7 @@ Grid App::build_grid(const std::vector<Line>& lines) const
 int App::count_overlaps() const
 {
 	int count{};
-	for (auto& row : m_grid.grid) {
+	for (auto& row : m_grid.m_grid) {
 		for (auto& cell : row) {
 			if (cell > 1)
 				++count;
@@ -134,7 +134,7 @@ std::ostream& operator<<(std::ostream& os, const Line& l)
 
 std::ostream& operator<<(std::ostream& os, const Grid& g)
 {
-	for (auto& l : g.grid) {
+	for (auto& l : g.m_grid) {
 		for (auto& i : l) {
 			os << std::setw(3) << i << ' ';
 		}

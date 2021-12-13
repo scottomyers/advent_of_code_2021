@@ -18,7 +18,7 @@ std::ostream& operator<<(std::ostream& os, const Line& l);
 
 struct Grid
 {
-	std::vector<std::vector<int>> grid;
+	std::vector<std::vector<int>> m_grid;
 };
 std::ostream& operator<<(std::ostream& os, const Grid& g);
 
